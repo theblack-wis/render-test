@@ -39,6 +39,7 @@
         }
 
         async function tt(){
+            alert(document.referrer);
             var data = getUlParam('q');
             if (!data)
                 window.location.href = "https://google.com";
